@@ -40,7 +40,7 @@ const actions = {
         try {
           const { db_type, db_user, db_password, db_url, database, package_manager } = inputs
           const root = `${__dirname}/${path}`;
-          console.log(roote);
+          console.log(root);
           console.log('Start initalizing your project!');
           fs.mkdirSync(`${root}`)
           fs.writeFileSync(`${root}/package.json`, templates.packages(path));
