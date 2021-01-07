@@ -1,8 +1,0 @@
-
-  **/node_modules/*
-  **/out/*
-  **/dist/*
-  **/src/generated/*
-  **/.next/*
-  .babelrc
-  **/*.test.tsx
