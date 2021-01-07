@@ -1,0 +1,17 @@
+{
+  "name": "gsc",
+  "version": "1.0.0",
+  "description": "goodoc gql sever cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "gsc": "./index.js"
+  },
+  "author": "dany",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^6.2.1"
+  }
+}
