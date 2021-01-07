@@ -10,8 +10,15 @@
     "type": "git",
     "url": "https://github.com/goodoc/gsc"
   },
-  "author": "dany",
+  "author": {
+    "name": "devdany",
+    "email": "dayong7387@gmail.com",
+    "url": "https://github.com/devdany"
+  },
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/goodoc/gsc/issues"
+  },
   "dependencies": {
     "commander": "^6.2.1"
   },
