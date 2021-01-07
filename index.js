@@ -38,10 +38,9 @@ const actions = {
       ])
       .then((inputs) => {
         try {
-          const { db_type, db_user, db_password, db_url, database, package_manager } = inputs
+          const { db_type, db_user, db_password, db_url, database } = inputs
           const currentPath = process.cwd();
           const root = `${currentPath}/${path}`;
-          console.log(root);
           console.log('Start initalizing your project!');
           fs.mkdirSync(`${root}`)
           fs.writeFileSync(`${root}/package.json`, templates.packages(path));
