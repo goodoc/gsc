@@ -1,5 +1,5 @@
 {
-  "name": "gsc",
+  "name": "goodoc-server-cli",
   "version": "1.0.0",
   "description": "goodoc gql sever cli",
   "main": "index.js",
