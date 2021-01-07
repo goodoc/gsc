@@ -39,7 +39,8 @@ const actions = {
       .then((inputs) => {
         try {
           const { db_type, db_user, db_password, db_url, database, package_manager } = inputs
-          const root = `${__dirname}/${path}`;
+          const currentPath = process.cwd();
+          const root = `${currentPath}/${path}`;
           console.log(root);
           console.log('Start initalizing your project!');
           fs.mkdirSync(`${root}`)
@@ -78,6 +79,9 @@ const actions = {
           fs.writeFileSync(`${root}/prettier.config.js`, templates.prettier);
           fs.writeFileSync(`${root}/README.md`, templates.readme);
           fs.writeFileSync(`${root}/tsconfig.json`, templates.tsconfig);
+
+          console.log('It\'s done!');
+          console.log('Happy Hacking :)');
         } catch (err) {
           console.error(err);
         }
