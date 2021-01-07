@@ -1,6 +1,6 @@
 {
   "name": "goodoc-server-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "goodoc gql sever cli",
   "scripts": {},
   "main": "index.js",
@@ -21,8 +21,13 @@
     "url": "https://github.com/goodoc/gsc/issues"
   },
   "dependencies": {
-    "commander": "^6.2.1"
+    "commander": "^6.2.1",
+    "inquirer": "^7.3.3"
   },
-  "keywords": ["npm", "goodoc", "cli"],
+  "keywords": [
+    "npm",
+    "goodoc",
+    "cli"
+  ],
   "homepage": "https://github.com/devdany"
 }
