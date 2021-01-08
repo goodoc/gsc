@@ -631,13 +631,13 @@ model ${model} {
 
   const schema = `import { objectType } from '@nexus/schema';
 
-const ${modelName} = objectType({
-  name: '${modelName}',
+const ${model} = objectType({
+  name: '${model}',
   definition(t) {
     t.model.id();
   },
 });
-export default ${modelName};`;
+export default ${model};`;
 
   return {
     prismaModel,
