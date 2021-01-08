@@ -26,10 +26,15 @@ yarn dev
 * Append prisma model & add schema
 ```
 gsc model [NewModelName]
+// update model in schema.prisma & src/schema/[NewModelName]
+yarn generate
+
 ```
 
 ### Add Resolver
 * Add custom resolver
 ```
 gsc resolver [NewResolverName]
+// update example custom resolver in src/resolvers/[NewResolverName]Resolver
+yarn generate
 ```

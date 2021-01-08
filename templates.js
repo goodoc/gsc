@@ -637,7 +637,8 @@ const ${model} = objectType({
     t.model.id();
   },
 });
-export default ${model};`;
+export default ${model};
+`;
 
   return {
     prismaModel,
