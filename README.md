@@ -1,5 +1,8 @@
 # Goodoc Sever template cli
 
+## Introduce
+This is cli for setting one template case of GraphQL + ApolloServer + Prisma2 + Nexus in a Goodoc
+
 ## Install
 ```
 npm install -g goodoc-server-cli 

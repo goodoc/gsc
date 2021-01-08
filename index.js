@@ -127,6 +127,10 @@ const actions = {
     const modelName = _.chain(model).camelCase().capitalize().value();
     const resolverName = `${modelName}Resolver`;
     const resolverPath = `${currentPath}/src/resolvers/${resolverName}.ts`;
+    if (fs.existsSync(resolverPath)) {
+      console.error('Already exist resolver!')
+      return
+    }
     fs.writeFileSync(resolverPath, templates.customResolver);
     const resolverIndexPath = `${currentPath}/src/resolvers/index.ts`
 
