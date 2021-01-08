@@ -132,9 +132,9 @@ import resolvers from '../resolvers';
 
 export const schema = makeSchema({
   types: [
-    resolvers,
     Post,
     User,
+    resolvers,
   ],
   plugins: [nexusPrisma({ experimentalCRUD: true })],
   outputs: {
@@ -586,6 +586,65 @@ const tsconfig = `{
 }
 `;
 
+const customResolver = `import {
+  queryField, mutationField, stringArg, intArg,
+} from '@nexus/schema';
+
+export default {
+  // CustomQueryResolver
+  exampleCustomQuery: queryField('exampleCustomQuery', {
+    type: 'Boolean',
+    nullable: true,
+    args: {
+      someString: stringArg({ nullable: false }),
+      someInt: intArg({ nullable: false }),
+    },
+    async resolve(_, args, ctx) {
+      console.log(ctx.prisma);
+      return args.someInt === 0;
+    },
+  }),
+  // CustomMutationResolver
+  exampleCustomMutation: mutationField('exampleCustomMutation', {
+    type: 'Boolean',
+    nullable: true,
+    args: {
+      someString: stringArg({ nullable: false }),
+      someInt: intArg({ nullable: false }),
+    },
+    async resolve(_, args, ctx) {
+      console.log(ctx.prisma);
+      return args.someString === 'goodoc';
+    },
+  }),
+};
+`
+
+const getModelTemplate = (model) => {
+  const prismaModel = `
+model ${model} {
+  id Int @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  deletedAt  DateTime?
+}`
+
+  const schema = `import { objectType } from '@nexus/schema';
+
+const ${modelName} = objectType({
+  name: '${modelName}',
+  definition(t) {
+    t.model.id();
+  },
+});
+export default ${modelName};`;
+
+  return {
+    prismaModel,
+    schema,
+  }
+}
+
 module.exports = {
   packages,
   prismaCli,
@@ -607,7 +666,9 @@ module.exports = {
   nexusTsConfig,
   prettier,
   readme,
-  tsconfig
+  tsconfig,
+  customResolver,
+  getModelTemplate,
 }
 
 

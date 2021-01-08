@@ -3,9 +3,14 @@ const commander = require('commander');
 const inquirer = require('inquirer');
 const templates = require('./templates');
 const fs = require('fs');
+var _ = require('lodash');
 
 const actions = {
   create: (path) => {
+    if (fs.existsSync(path)) {
+      console.error('Already exist path!')
+      return
+    }
     inquirer
       .prompt([
         {
@@ -85,13 +90,62 @@ const actions = {
           console.error(err);
         }
       })
-  }
+  },
+  model: (model) => {
+    const currentPath = process.cwd();
+    const prismaPath = `${currentPath}/prisma/schema.prisma`;
+    const modelName = _.chain(model).camelCase().capitalize().value();
+    const schemaPath = `${currentPath}/src/schema/${modelName}.ts`; 
+    if (!fs.existsSync(prismaPath)) {
+      console.error('Prisma file is not exist!')
+      return
+    }
+
+    if (fs.existsSync(schemaPath)) {
+      console.error('Already exist schema!')
+      return
+    }
+
+    const { prismaModel, schema } = templates.getModelTemplate(modelName)
+
+    fs.appendFileSync(`${currentPath}/prisma/schema.prisma`, prismaModel)
+    fs.writeFileSync(schemaPath, schema);
+
+    let schemaFile = fs.readFileSync(`${currentPath}/src/schema/index.ts`, { encoding: 'utf8' })
+
+    schemaFile = `import ${modelName} from './${modelName}';\n` + schemaFile
+    const standard = '  ],\n  plugins: [nexusPrisma({ experimentalCRUD: true })]'
+    const splited = schemaFile.split(standard)
+    let types = splited[0];
+    types = types + `    ${modelName},\n${standard}`
+    const newModelAppendedSchema = types + splited[1];
+
+    fs.writeFileSync(`${currentPath}/src/schema/index.ts`, newModelAppendedSchema)
+  },
+  resolver: (model) => {
+    const currentPath = process.cwd();
+    const modelName = _.chain(model).camelCase().capitalize().value();
+    const resolverName = `${modelName}Resolver`;
+    const resolverPath = `${currentPath}/src/resolvers/${resolverName}.ts`;
+    fs.writeFileSync(resolverPath, templates.customResolver);
+    const resolverIndexPath = `${currentPath}/src/resolvers/index.ts`
+
+    let schemaFile = fs.readFileSync(resolverIndexPath, { encoding: 'utf8' })
+    schemaFile = `import ${resolverName} from './${resolverName}';\n` + schemaFile;
+    const standard = 'export default {\n'
+    const splited = schemaFile.split(standard);
+    let resolvers = splited[1];
+    resolvers = `  ${resolverName},\n` + resolvers;
+    const merged = splited[0] + standard + resolvers;
+
+    fs.writeFileSync(resolverIndexPath, merged);
+  },
 }
 
 commander
-  .arguments("<action> <path>")
-  .action(function(action, path) {
+  .arguments("<action> <target>")
+  .action(function(action, target) {
     const selectedAction = actions[action];
-    selectedAction(path);
+    selectedAction(target);
   })
   .parse(process.argv);
