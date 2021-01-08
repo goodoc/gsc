@@ -10,6 +10,16 @@ npm install -g goodoc-server-cli
 * Create dir project for new project
 ```
 gsc create [ProjectName]
+cd [ProjectName]
+
+// Add dependency yarn or npm install
+yarn
+
+// prisma & nexus generate
+yarn generate
+
+// server start
+yarn dev
 ```
 
 ### Add Model
