@@ -83,7 +83,6 @@ const actions = {
           fs.writeFileSync(`${root}/prettier.config.js`, templates.prettier);
           fs.writeFileSync(`${root}/README.md`, templates.readme);
           fs.writeFileSync(`${root}/tsconfig.json`, templates.tsconfig);
-
           console.log('It\'s done!');
           console.log('Happy Hacking :)');
         } catch (err) {
