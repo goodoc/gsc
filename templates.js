@@ -18,13 +18,13 @@ const packages = (path) => `{
     "test": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
-    "@nexus/schema": "0.20.1",
-    "@prisma/cli": "2.15.0",
-    "@prisma/client": "2.15.0",
+    "@nexus/schema": "^0.20.1",
+    "@prisma/cli": "^2.15.0",
+    "@prisma/client": "^2.15.0",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "apollo-server": "^2.19.2",
     "dotenv": "^8.2.0",
-    "graphql": "15.4.0",
+    "graphql": "^15.4.0",
     "nexus": "^1.0.0",
     "nexus-plugin-prisma": "^0.28.0"
   },
