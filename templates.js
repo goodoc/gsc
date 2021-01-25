@@ -8,9 +8,9 @@ const packages = (path) => `{
     "build": "yarn clean && yarn generate && tsc",
     "generate": "yarn generate:prisma && yarn generate:nexus",
     "generate:prisma": "prisma generate",
-    "migrate:save": "prisma migrate save --experimental",
+    "migrate:dev": "prisma migrate dev --preview-feature",
     "studio": "prisma studio --experimental",
-    "migrate:up": "prisma migrate up --experimental",
+    "migrate:deploy": "prisma migrate deploy --preview-feature",
     "generate:nexus": "ts-node --transpile-only  -P nexus.tsconfig.json ./src/schema/index.ts",
     "dev": "ts-node --transpile-only src/index.ts",
     "lint": "yarn eslint . --ext ts,tsx",
@@ -18,14 +18,15 @@ const packages = (path) => `{
     "test": "jest --detectOpenHandles --forceExit"
   },
   "dependencies": {
-    "@nexus/schema": "0.17.0",
-    "@prisma/cli": "2.11.0",
-    "@prisma/client": "2.11.0",
+    "@nexus/schema": "0.20.1",
+    "@prisma/cli": "2.15.0",
+    "@prisma/client": "2.15.0",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
-    "apollo-server": "^2.19.1",
+    "apollo-server": "^2.19.2",
     "dotenv": "^8.2.0",
     "graphql": "15.4.0",
-    "nexus-plugin-prisma": "^0.23.0"
+    "nexus": "^1.0.0",
+    "nexus-plugin-prisma": "^0.28.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.16",
